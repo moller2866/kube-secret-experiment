@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: quotes-flask
+data:
+  # all data points are handled as strings
+  backend_host: "backend"
+  backend_port: "5000"

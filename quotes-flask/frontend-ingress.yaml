@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: quotes-ingress
+  namespace: quotes-flask
+  annotations: 
+    ingress.cilium.io/service-type: NodePort
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: quotes-flask-192.168.120.139.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: frontend
+            port: 
+              number: 5000
+        path: /
+        pathType: Prefix
