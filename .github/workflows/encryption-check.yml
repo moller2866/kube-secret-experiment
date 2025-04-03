@@ -8,6 +8,9 @@ jobs:
         name: Check Encryption
         runs-on: self-hosted
         steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+            
         - name: Running encryption check for all secrets
           run: bash ci/check-secrets.sh
           continue-on-error: true
