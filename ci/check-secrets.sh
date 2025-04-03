@@ -2,7 +2,7 @@
 
 SEALED_SECRETS_NAMESPACE="kube-system"
 SEALED_SECRETS_LABEL="sealedsecrets.bitnami.com/sealed-secrets-key"
-LATEST_KEY_TIMESTAMP=$(kubectl get secret -n "$SEALED_SECRETS_NAMESPACE" -l "$SEALED_SECRETS_LABEL" -o jsonpath='{.items[-1:].metadata.creationTimestamp}')
+LATEST_KEY_TIMESTAMP=$(kubectl get secret -n "$SEALED_SECRETS_NAMESPACE" -l "$SEALED_SECRETS_LABEL" -o json | jq -r '.items | max_by(.metadata.creationTimestamp) | .metadata.creationTimestamp')
 
 if [ -z "$LATEST_KEY_TIMESTAMP" ]; then
   echo "Error: Could not retrieve the latest sealed-secrets key."
