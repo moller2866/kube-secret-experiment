@@ -13,7 +13,6 @@ jobs:
             
         - name: Running encryption check for all secrets
           run: bash ci/check-secrets.sh
-          continue-on-error: true
 
     reencrypt-secrets:
         name: Reencrypt Secrets
